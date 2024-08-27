@@ -2,6 +2,9 @@ let listaAmigosArray = []
 let sorteioRealizado = false
 
 function adicionar() {
+    if (sorteioRealizado == true) {
+        return alert('Sorteio realizado, impossivel adicionar participante')
+    }
     let nomeAmigo = document.getElementById('nome-amigo')
 
     if (nomeAmigo.value == '') {
@@ -11,13 +14,14 @@ function adicionar() {
     }
 
     let listaAmigos = document.getElementById('lista-amigos')
+    let nomeMinusculo = nomeAmigo.value.toLowerCase()
 
-    if (listaAmigosArray.includes(nomeAmigo.value)) {
+    if (listaAmigosArray.includes(nomeMinusculo)) {
         alert(`Nome "${nomeAmigo.value}" ja possui na lista, por favor, digite o nome e sobrenome referente a pessoa`)
         nomeAmigo.value = ''
         return
     } else {
-        listaAmigosArray.push(nomeAmigo.value)
+        listaAmigosArray.push(nomeMinusculo)
      }
 
     if (listaAmigos.textContent == '') {
@@ -58,7 +62,8 @@ function embaralhar(lista) {
 }
 
 function reiniciar() {
-    btnSortear.disabled = false
+    document.getElementById('nome-amigo').value = ''
+    sorteioRealizado = false
     listaAmigosArray = []
     document.getElementById('lista-amigos').innerHTML = ''
     document.getElementById('lista-sorteio').innerHTML = ''
